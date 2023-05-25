@@ -4,8 +4,10 @@ import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   return (
     <Container
       sx={{
@@ -19,7 +21,8 @@ function Login() {
       <Card>
         <Container
           sx={{
-            padding: "30px",
+            padding: "40px",
+            minWidth: "310px",
           }}
         >
           <h1 style={{ textAlign: "center", marginTop: "0" }}>LOGIN</h1>
@@ -34,13 +37,18 @@ function Login() {
               ) {
                 errors.email = "Invalid email address";
               }
+
+              if (!values.password) {
+                errors.password = "Required";
+              }
               return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 400);
+              // setTimeout(() => {
+              //   alert(JSON.stringify(values, null, 2));
+              //   setSubmitting(false);
+              // }, 400);
+              navigate("/patients");
             }}
           >
             {({
@@ -51,9 +59,17 @@ function Login() {
               handleBlur,
               handleSubmit,
               isSubmitting,
-              /* and other goodies */
             }) => (
-              <form onSubmit={handleSubmit}>
+              <form
+                onSubmit={handleSubmit}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "40px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 <TextField
                   label="Email"
                   variant="outlined"

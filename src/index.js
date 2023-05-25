@@ -5,11 +5,13 @@ import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import AUTH_ROUTES from "./feature/auth/routes";
+import PATIENTS_ROUTES from "./feature/patient/routes";
 
 const router = createBrowserRouter([
   ...AUTH_ROUTES,
+  ...PATIENTS_ROUTES,
   {
-    path: "/app",
+    path: "/",
     element: <App />,
   },
 ]);
