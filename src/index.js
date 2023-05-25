@@ -1,25 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
-import AUTH_ROUTES from "./feature/auth/routes";
-import PATIENTS_ROUTES from "./feature/patient/routes";
+import { PATIENTS_PRIVATE_ROUTES } from "./feature/patient/routes/private";
+import { AUTH_PUBLIC_ROUTES } from "./feature/auth";
+import { ErrorBoundary } from "./providers/ErrorBoundary";
 
 const router = createBrowserRouter([
-  ...AUTH_ROUTES,
-  ...PATIENTS_ROUTES,
-  {
-    path: "/",
-    element: <App />,
-  },
+  ...AUTH_PUBLIC_ROUTES,
+  ...PATIENTS_PRIVATE_ROUTES,
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ErrorBoundary>
+      <RouterProvider router={router} />
+    </ErrorBoundary>
   </React.StrictMode>
 );
 
